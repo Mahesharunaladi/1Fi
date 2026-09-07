@@ -39,7 +39,7 @@ function App() {
     const categoryMatch = activeCategory === 'all' || product.category === activeCategory;
     const queryMatch = product.name.toLowerCase().includes(query.toLowerCase());
     return categoryMatch && queryMatch;
-  }), [activeCategory, query]);
+  }), [activeCategory, products, query]);
 
   const openProduct = (product) => {
     setSelectedProduct(product);
@@ -62,7 +62,7 @@ function App() {
         <div className="brand-mark">1<span>Fi</span></div>
         <div className="topbar-actions">
           <button className="icon-button" aria-label="Notifications"><Icon name="bell" /></button>
-          <div className="avatar">AK</div>
+          <div className="avatar" aria-label="Default profile"><Icon name="profile" size={18} /></div>
         </div>
       </header>
 
