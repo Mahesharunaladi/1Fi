@@ -18,6 +18,7 @@ export const products = [
     image: '/assets/pixel-buds-pro-2.png',
     description: 'Premium noise cancelling earbuds with a comfortable all-day fit and immersive sound.',
     features: ['Active noise cancellation', '30 hour battery life', 'Wireless charging case'],
+    variants: [{ id: 'porcelain', label: 'Porcelain' }, { id: 'hazel', label: 'Hazel' }],
     plans: [
       { id: 'p1', months: 3, monthly: 6333, interest: '0% interest' },
       { id: 'p2', months: 6, monthly: 3167, interest: '0% interest' },
@@ -36,6 +37,7 @@ export const products = [
     image: '/assets/samsung-galaxy-m53.webp',
     description: 'A smooth, powerful 5G phone with a vivid Super AMOLED display and all-day battery life.',
     features: ['6.7” Super AMOLED Plus display', '108 MP quad camera', '5000 mAh battery'],
+    variants: [{ id: 'green', label: 'Mystique Green' }, { id: 'brown', label: 'Light Brown' }],
     plans: [
       { id: 'm53-3', months: 3, monthly: 9667, interest: '0% interest' },
       { id: 'm53-6', months: 6, monthly: 4833, interest: '0% interest' },
@@ -52,8 +54,9 @@ export const products = [
     badge: 'Smart pick',
     accent: 'mint',
     image: '/assets/eureka-forbes-air-purifier.webp',
-    description: 'Breathe cleaner air with three-stage filtration, quiet night operation and app control.',
-    features: ['True HEPA filtration', '516 sq. ft. coverage', 'Mi Home app controls'],
+    description: 'Breathe cleaner air with multi-stage filtration, quiet night operation and smart controls.',
+    features: ['True HEPA filtration', 'Air quality indicator', 'Smart app controls'],
+    variants: [{ id: 'white', label: 'White' }, { id: 'black', label: 'Black' }],
     plans: [
       { id: 'xiaomi-air-3', months: 3, monthly: 4667, interest: '0% interest' },
       { id: 'xiaomi-air-6', months: 6, monthly: 2333, interest: '0% interest' },
@@ -72,6 +75,7 @@ export const products = [
     image: '/assets/samsung-galaxy-watch-ultra2.webp',
     description: 'A rugged smart watch built for training, with GPS tracking and a tough G-Shock design.',
     features: ['Built-in GPS and six sensors', 'Heart rate and workout tracking', 'Shock-resistant water-resistant design'],
+    variants: [{ id: 'black', label: 'Black' }, { id: 'orange', label: 'Black & Orange' }],
     plans: [
       { id: 'gshock-3', months: 3, monthly: 8333, interest: '0% interest' },
       { id: 'gshock-6', months: 6, monthly: 4167, interest: '0% interest' },

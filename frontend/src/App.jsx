@@ -21,6 +21,7 @@ function App() {
   const [view, setView] = useState('shop');
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedVariant, setSelectedVariant] = useState(null);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [query, setQuery] = useState('');
   const [notice, setNotice] = useState('');
@@ -43,17 +44,19 @@ function App() {
 
   const openProduct = (product) => {
     setSelectedProduct(product);
+    setSelectedVariant(product.variants?.[0] || null);
     setSelectedPlan(product.plans[1] || product.plans[0]);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const checkout = () => {
-    setNotice(`Your ${selectedProduct.name} plan is ready to continue.`);
+    const variantText = selectedVariant ? ` in ${selectedVariant.label}` : '';
+    setNotice(`${selectedProduct.name}${variantText} · ${selectedPlan.months}-month plan selected.`);
     window.setTimeout(() => setNotice(''), 3500);
   };
 
   if (selectedProduct) {
-    return <ProductDetail product={selectedProduct} selectedPlan={selectedPlan} setSelectedPlan={setSelectedPlan} onBack={() => setSelectedProduct(null)} onCheckout={checkout} notice={notice} />;
+    return <ProductDetail product={selectedProduct} selectedVariant={selectedVariant} setSelectedVariant={setSelectedVariant} selectedPlan={selectedPlan} setSelectedPlan={setSelectedPlan} onBack={() => setSelectedProduct(null)} onCheckout={checkout} notice={notice} />;
   }
 
   return (
@@ -111,7 +114,7 @@ function ProductCard({ product, onClick }) {
   </article>;
 }
 
-function ProductDetail({ product, selectedPlan, setSelectedPlan, onBack, onCheckout, notice }) {
+function ProductDetail({ product, selectedVariant, setSelectedVariant, selectedPlan, setSelectedPlan, onBack, onCheckout, notice }) {
   const image = product.image.startsWith('/') ? <img className="product-photo" src={product.image} alt={product.name} /> : product.image;
   return <div className="app-shell detail-shell">
     <header className="detail-header"><button className="back-button" onClick={onBack} aria-label="Back"><Icon name="back" /></button><span>Product details</span><button className="icon-button" aria-label="Save product"><Icon name="heart" /></button></header>
@@ -120,6 +123,7 @@ function ProductDetail({ product, selectedPlan, setSelectedPlan, onBack, onCheck
       <div className="detail-title"><div><span className="product-category">{product.categoryLabel}</span><h1>{product.name}</h1></div><button className="round-button"><Icon name="heart" /></button></div>
       <div className="detail-price"><strong>{formatPrice(product.price)}</strong><del>{formatPrice(product.originalPrice)}</del><span>Save {formatPrice(product.originalPrice - product.price)}</span></div>
       <div className="emi-highlight"><div className="emi-symbol">₹</div><div><strong>0% interest EMIs</strong><p>Flexible plans starting from {formatPrice(product.plans[product.plans.length > 1 ? 1 : 0].monthly)}/month</p></div><Icon name="arrow" size={18} /></div>
+      {product.variants?.length > 0 && <section className="detail-section variant-section"><h2>Choose a variant</h2><p className="muted">Select your preferred option.</p><div className="variant-list">{product.variants.map((variant) => <button key={variant.id} className={selectedVariant?.id === variant.id ? 'variant-card selected' : 'variant-card'} onClick={() => setSelectedVariant(variant)}><span className="radio">{selectedVariant?.id === variant.id && <span />}</span><b>{variant.label}</b></button>)}</div></section>}
       <section className="detail-section"><h2>Choose your plan</h2><p className="muted">Select a tenure that works for you.</p><div className="plan-list">{product.plans.map((plan) => <button key={plan.id} className={selectedPlan?.id === plan.id ? 'plan-card selected' : 'plan-card'} onClick={() => setSelectedPlan(plan)}><span className="radio">{selectedPlan?.id === plan.id && <span />}</span><span><b>{plan.months} months</b><small>{plan.interest}</small></span><strong>{formatPrice(plan.monthly)}<small>/month</small></strong></button>)}</div></section>
       <section className="detail-section"><h2>About this product</h2><p className="description">{product.description}</p><div className="feature-list">{product.features.map((feature) => <span key={feature}>✓ {feature}</span>)}</div></section>
     </main>
