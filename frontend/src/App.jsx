@@ -104,17 +104,19 @@ function App() {
 }
 
 function ProductCard({ product, onClick }) {
+  const image = product.image.startsWith('/') ? <img className="product-photo" src={product.image} alt={product.name} /> : product.image;
   return <article className="product-card" onClick={onClick} tabIndex="0" onKeyDown={(event) => event.key === 'Enter' && onClick()}>
-    <div className={`product-image ${product.accent}`}>{product.badge && <span className="badge">{product.badge}</span>}<button className="heart-button" onClick={(event) => event.stopPropagation()} aria-label={`Save ${product.name}`}><Icon name="heart" size={18} /></button><span className="product-emoji">{product.image}</span></div>
+    <div className={`product-image ${product.accent}`}>{product.badge && <span className="badge">{product.badge}</span>}<button className="heart-button" onClick={(event) => event.stopPropagation()} aria-label={`Save ${product.name}`}><Icon name="heart" size={18} /></button><span className="product-emoji">{image}</span></div>
     <div className="product-info"><span className="product-category">{product.categoryLabel}</span><h3>{product.name}</h3><div className="price-row"><strong>{formatPrice(product.price)}</strong><del>{formatPrice(product.originalPrice)}</del></div><p>from <b>{formatPrice(product.plans[product.plans.length > 1 ? 1 : 0].monthly)}</b>/mo <span>· 0% EMI</span></p></div>
   </article>;
 }
 
 function ProductDetail({ product, selectedPlan, setSelectedPlan, onBack, onCheckout, notice }) {
+  const image = product.image.startsWith('/') ? <img className="product-photo" src={product.image} alt={product.name} /> : product.image;
   return <div className="app-shell detail-shell">
     <header className="detail-header"><button className="back-button" onClick={onBack} aria-label="Back"><Icon name="back" /></button><span>Product details</span><button className="icon-button" aria-label="Save product"><Icon name="heart" /></button></header>
     <main className="detail-content">
-      <div className={`detail-image ${product.accent}`}><span className="product-emoji">{product.image}</span></div>
+      <div className={`detail-image ${product.accent}`}><span className="product-emoji">{image}</span></div>
       <div className="detail-title"><div><span className="product-category">{product.categoryLabel}</span><h1>{product.name}</h1></div><button className="round-button"><Icon name="heart" /></button></div>
       <div className="detail-price"><strong>{formatPrice(product.price)}</strong><del>{formatPrice(product.originalPrice)}</del><span>Save {formatPrice(product.originalPrice - product.price)}</span></div>
       <div className="emi-highlight"><div className="emi-symbol">₹</div><div><strong>0% interest EMIs</strong><p>Flexible plans starting from {formatPrice(product.plans[product.plans.length > 1 ? 1 : 0].monthly)}/month</p></div><Icon name="arrow" size={18} /></div>
