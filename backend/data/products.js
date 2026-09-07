@@ -1,7 +1,7 @@
 export const products = [
   {
     id: 'pixel-buds-pro', name: 'Pixel Buds Pro 2', category: 'electronics', categoryLabel: 'Audio',
-    price: 18999, originalPrice: 22999, badge: 'Popular', accent: 'lavender', image: '🎧',
+    price: 18999, originalPrice: 22999, badge: 'Popular', accent: 'lavender', image: '/assets/pixel-buds-pro-2.png',
     description: 'Premium noise cancelling earbuds with a comfortable all-day fit and immersive sound.',
     features: ['Active noise cancellation', '30 hour battery life', 'Wireless charging case'],
     plans: [{ id: 'p1', months: 3, monthly: 6333, interest: '0% interest' }, { id: 'p2', months: 6, monthly: 3167, interest: '0% interest' }, { id: 'p3', months: 9, monthly: 2222, interest: '0% interest' }],

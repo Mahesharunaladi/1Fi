@@ -15,7 +15,7 @@ export const products = [
     originalPrice: 22999,
     badge: 'Popular',
     accent: 'lavender',
-    image: '🎧',
+    image: '/assets/pixel-buds-pro-2.png',
     description: 'Premium noise cancelling earbuds with a comfortable all-day fit and immersive sound.',
     features: ['Active noise cancellation', '30 hour battery life', 'Wireless charging case'],
     plans: [
